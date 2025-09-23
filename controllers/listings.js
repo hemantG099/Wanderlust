@@ -3,6 +3,7 @@
  const mapToken = process.env.MAP_TOKEN ;
  const geocodingClient = mbxGeocoding({ accessToken: mapToken });
  
+
  module.exports.index = async (req, res) => {
     currUser = res.locals.currUser;
     const allListing = await Listing.find({});

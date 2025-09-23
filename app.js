@@ -36,9 +36,7 @@ main()
     }); 
 
 async function main() {
-    await mongoose.connect(dbUrl, {
-        
-    });
+    await mongoose.connect(dbUrl);
 }
 
 
@@ -96,7 +94,11 @@ passport.deserializeUser(User.deserializeUser());
     next();
 });
 
-
+app.get("/", async (req, res) => {
+    currUser = res.locals.currUser;
+    const allListing = await Listing.find({});
+    res.render("listings/index.ejs",{ allListing, currUser });
+ })
  
 app.use("/listings", listingsRoute );
 app.use("/listings/:id/review", reviewsRoute);
